@@ -3,10 +3,10 @@ import { Menu, MenuButton, MenuItem, MenuItems } from "@headlessui/react";
 import { Filter, Plus } from "lucide-react";
 import { useSelector } from "react-redux";
 
-const status = ["alll", "paid", "pending", "draft"];
+const status = ["all", "paid", "pending", "draft"];
 
 export default function Header({ onNewInvoice }) {
-  const { invoices } = useSelector((state) => state.invoices);
+  const { invoices,filter} = useSelector((state) => state.invoices);
   return (
     <header className="flex items-center justify-between">
       <div>
@@ -14,7 +14,7 @@ export default function Header({ onNewInvoice }) {
         <p className="text-slate">
           {invoices.length === 0
             ? `No Invoices`
-            : `There are ${invoices.length} invoices. b`}
+            : `There are ${invoices.length} invoices.`}
         </p>
       </div>
       <div className="flex items-center space-x-8">
@@ -26,9 +26,13 @@ export default function Header({ onNewInvoice }) {
           <Menu.Items className="absolute right-0 mt-2 w-48 bg-slate-800 rounded-lg shadow-lg p-2 z-10">
             {status.map((s) => (
               <Menu.Item key={s}>
-                <button className="w-full text-left px-4 py-2 rounded-lg capitalize">
-                  {s}
-                </button>
+                {({ active }) => (
+                  <button
+                    className={`${active ? "bg-slate-700" : ""} w-full text-left x-4 py-2 rounded-lg capitalize ${filter === s ?"text-violet-500" :"text-white"}`}
+                  >
+                    {s}
+                  </button>
+                )}
               </Menu.Item>
             ))}
           </Menu.Items>
