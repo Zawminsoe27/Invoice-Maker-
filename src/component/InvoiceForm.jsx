@@ -192,7 +192,10 @@ export default function InvoiceForm() {
                   setFormData({
                     ...formData,
                     invoiceDate: newDate,
-                    dueDate: format(addDays(new Date(newDate), 30)),
+                    dueDate: format(
+                      addDays(new Date(newDate), 30),
+                      "yyyy-MM-dd",
+                    ),
                   });
                 }}
               />
